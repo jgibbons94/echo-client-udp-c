@@ -1,4 +1,3 @@
-DEFS = -D WATCHING
 all: bin/server bin/client
 run: all
 	bin/server &
@@ -8,13 +7,13 @@ bin/server: obj/server.o
 	gcc obj/server.o -o bin/server
 
 obj/server.o: src/server.c
-	gcc -c $(DEFS) src/server.c -o obj/server.o
+	gcc -c src/server.c -o obj/server.o
 
 bin/client: obj/client.o
 	gcc obj/client.o -o bin/client
 
 obj/client.o: src/client.c
-	gcc -c $(DEFS) src/client.c -o obj/client.o
+	gcc -c src/client.c -o obj/client.o
 
 clean:
 	rm -rv obj

@@ -13,7 +13,7 @@ int main(int argc, const char** argv)
 	int sock = 0;
 	struct sockaddr_in saddr;
 	struct sockaddr_in caddr;
-	socklen_t addrsize;
+	socklen_t addrsize = sizeof(addrsize);
 	char buffer[16];
 	//setup
 	announce("setting up...\n");
@@ -43,19 +43,6 @@ int main(int argc, const char** argv)
 	//respond
 	announce("sending...\n");
 	fprintf(stderr, "%s\n", buffer);
-
-	#ifdef WATCHING
-	fprintf(stderr, "sendto(%%i, \"%%s\", %i, %%i,\n {caddr.sin_family: %%i, caddr.sin_port:%x, caddr.sin_addr:%s}, %i);\n"
-			//, sock
-			//, buffer
-			, strlen(buffer)
-			//, 0
-			//, caddr.sin_family
-			, caddr.sin_port
-			, inet_ntoa(caddr.sin_addr)
-			, addrsize
-		);
-	#endif
 	
 	if(sendto(sock, buffer, strlen(buffer), 0,
 			(struct sockaddr*)(&caddr), addrsize)==-1)
